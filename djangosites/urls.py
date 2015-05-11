@@ -5,6 +5,8 @@ from djangosites.websites.models import Website
 from voting.views import vote_on_object
 from tagging.views import tagged_object_list
 from djangosites.websites.feeds import LatestSitesFeed, SitesByAuthorFeed, SitesByTagFeed, AllSitesByTagFeed
+from django.contrib.staticfiles.urls import staticfiles_urlpatterns
+from django.conf import settings
 
 from django.contrib import admin
 admin.autodiscover()
@@ -65,3 +67,16 @@ urlpatterns = patterns('',
     url(r'^flag/$', include('flag.urls')),
 
 )
+
+urlpatterns += staticfiles_urlpatterns()
+if settings.DEBUG:
+    urlpatterns += patterns('',
+        url(r'^%s(?P<path>.*)$' % settings.MEDIA_URL.lstrip('/'), 'django.views.static.serve', {
+            'document_root': settings.MEDIA_ROOT,
+        }),
+    )
+    import debug_toolbar
+    urlpatterns += patterns('',
+        url(r'^__debug__/', include(debug_toolbar.urls)),
+    )
+

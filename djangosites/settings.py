@@ -8,15 +8,19 @@ SITE_ID = 1
 
 USE_I18N = False
 
-MEDIA_ROOT = '/var/python-envs/djangosites/htdocs/'
+import os
+DIRNAME = os.path.abspath(os.path.dirname(__file__))
+# MEDIA_ROOT = '/var/python-envs/djangosites/htdocs/'
+MEDIA_ROOT = os.path.join(DIRNAME, "templates", "media")
 MEDIA_URL = '/media/'
 STATIC_ROOT = MEDIA_ROOT + 'static/'
 STATIC_URL = MEDIA_URL + 'static/'
+STATIC_URL = '/static/' # for django debug toolbar
 
 
 TEMPLATE_LOADERS = (
-    'django.template.loaders.filesystem.Loader',
     'django.template.loaders.app_directories.Loader',
+    'django.template.loaders.filesystem.Loader',
     'django.template.loaders.eggs.Loader',
 )
 
@@ -35,6 +39,7 @@ MIDDLEWARE_CLASSES = (
     'django_authopenid.middleware.OpenIDMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.cache.FetchFromCacheMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 )
 
 ROOT_URLCONF = 'djangosites.urls'
@@ -66,6 +71,7 @@ INSTALLED_APPS = (
     'pagination',
     'gunicorn',
     'djrill',
+    'debug_toolbar',
 )
 
 LOGIN_REDIRECT_URL = '/'
