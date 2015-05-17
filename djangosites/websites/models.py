@@ -158,7 +158,9 @@ class Website(models.Model):
         return '/var/python-envs/djangosites/htdocs/screenshots-large/%s.jpg' % self.id
     
     def screenshot_url(self):
-        return 'http://www.djangosites.org/media/screenshots/%s.jpg' % self.id
+        # return 'http://www.djangosites.org/media/screenshots/%s.jpg' % self.id
+        # chmod  777 XXX
+        return '/media/screenshots/1.jpg'
     
     def largescreenshot_url(self):
         return 'http://www.djangosites.org/media/screenshots-large/%s.jpg' % self.id
