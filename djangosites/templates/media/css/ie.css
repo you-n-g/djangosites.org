@@ -1,3 +1,1 @@
-div#wrapper {
-    width: expression(document.body.clientWidth > 1024? "1024" : auto);
-}
+div#wrapper{width:expression(document.body.clientWidth>1024? "1024":auto);}
