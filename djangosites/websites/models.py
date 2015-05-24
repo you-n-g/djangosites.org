@@ -152,18 +152,18 @@ class Website(models.Model):
         return Vote.objects.get_score(self)['num_votes']
     
     def screenshot_uri(self):
-        return '/var/python-envs/djangosites/htdocs/screenshots/%s.jpg' % self.id
+        return '/var/python-envs/djangosites/htdocs/screenshots/%s.png' % self.id
     
     def largescreenshot_uri(self):
-        return '/var/python-envs/djangosites/htdocs/screenshots-large/%s.jpg' % self.id
+        return '/var/python-envs/djangosites/htdocs/screenshots-large/%s.png' % self.id
     
     def screenshot_url(self):
-        # return 'http://www.djangosites.org/media/screenshots/%s.jpg' % self.id
+        # return 'http://www.djangosites.org/media/screenshots/%s.png' % self.id
         # chmod  777 XXX
-        return '/media/screenshots/1.jpg'
+        return '/media/screenshots/1.png'
     
     def largescreenshot_url(self):
-        return 'http://www.djangosites.org/media/screenshots-large/%s.jpg' % self.id
+        return 'http://www.djangosites.org/media/screenshots-large/%s.png' % self.id
     
     def save(self, force_insert=False, force_update=False):
         if not self.owner:

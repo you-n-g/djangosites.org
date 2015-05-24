@@ -116,7 +116,7 @@
         <h2>Log in</h2>
         <p>To place a vote or add your own sites, you need to be logged in. You can either log in below, or <a href="/accounts/signup/">register today</a>.</p>                    
         <div id="auth_login">
-            <p class="login_toggle"><img src="/media/openid.gif" alt="OpenID" height="16" width="16"><a href="#">Signin With OpenID</a></p>
+            <p class="login_toggle"><img src="/media/openid.png" alt="OpenID" height="16" width="16"><a href="#">Signin With OpenID</a></p>
             <form method="post" action="/accounts/signin/">{% csrf_token %}
                 <p><label for="id_username">Username:</label><br><input name="username" maxlength="30" size="17" type="text"></p>
                 <p><label for="id_password">Password:</label><br><input name="password" maxlength="128" size="17" type="password"></p>
