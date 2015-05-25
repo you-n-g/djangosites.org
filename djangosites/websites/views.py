@@ -9,6 +9,7 @@ from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.db.models import Q
 from django.core.cache import cache
+from django.views.decorators.cache import cache_page
 
 def website_detail(request, slug):
     w = get_object_or_404(Website, slug=slug)
@@ -255,7 +256,7 @@ def deployment_stats(request):
     }))
 
 
-
+@cache_page(60 * 30)
 def latest(request):
     websites = Website.objects.select_related().filter(verified=True).order_by('-created',).select_related()
     
