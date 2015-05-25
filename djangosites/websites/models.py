@@ -11,6 +11,7 @@ from djangosites.websites.signals import update_website_votes
 
 from djangosites.middleware import threadlocals
 from django.conf.locale import LANG_INFO
+from django.core.cache import cache
 
 SS_CHOICES = (
     ('none', 'No Screenshot'),
@@ -164,6 +165,12 @@ class Website(models.Model):
     
     def largescreenshot_url(self):
         return 'http://www.djangosites.org/media/screenshots-large/%s.png' % self.id
+
+    def get_owner(self):
+        OWER_KEY = "WEBSITE_%s" % self.owner_id 
+        if cache.get(OWER_KEY) is None:
+            cache.set(OWER_KEY, self.owner, 3600)
+        return cache.get(OWER_KEY)
     
     def save(self, force_insert=False, force_update=False):
         if not self.owner:
