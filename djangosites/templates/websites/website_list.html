@@ -91,9 +91,6 @@
                     <div class="website_preview">
                         <p class="header"><span class="title{% if website.source_url %}withsource{% endif %}"><a href="{{ website.url }}">{{ website.title|truncate_dot:25 }}</a></span> </p>
                         <a href="{{ website.get_absolute_url }}"><img src="{{ website.screenshot_url }}" alt="{{ website.title }}"></a>
-                        {% comment %}
-                        <p class="info"><a href='/author/{{ website.owner.username }}/'>{{ website.owner.get_full_name|default:website.owner.username }}</a> <span class="date">{{ website.created|date:"j/m/y" }}</span></p>
-                        {% endcomment %}
                         <p class="info"><a href='/author/{{ website.get_owner.username }}/'>{{ website.get_owner.get_full_name|default:website.get_owner.username }}</a> <span class="date">{{ website.created|date:"j/m/y" }}</span></p>
                     </div>
                 </div>

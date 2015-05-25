@@ -8,6 +8,7 @@ from tagging.utils import calculate_cloud, LOGARITHMIC
 from django.template import RequestContext
 from django.http import HttpResponseRedirect
 from django.db.models import Q
+from django.core.cache import cache
 
 def website_detail(request, slug):
     w = get_object_or_404(Website, slug=slug)
@@ -253,16 +254,20 @@ def deployment_stats(request):
         'num_responses': num_responses,
     }))
 
-    
+
 
 def latest(request):
     websites = Website.objects.select_related().filter(verified=True).order_by('-created',).select_related()
+    
+    COUNT_KEY = "WEBSITE_COUNT"
+    if cache.get(COUNT_KEY) is None:
+        cache.set(COUNT_KEY, int(websites.count()), 4 * 3600)
 
     return render_to_response('websites/website_list.html', RequestContext(request, {
         'website_list': websites,
         'page_title': 'Latest Additions',
         'view': 'latest',
-        'hits': websites.count(),
+        'hits': cache.get(COUNT_KEY),
         }))
 
 def by_rating(request):
