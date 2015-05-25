@@ -256,7 +256,7 @@ def deployment_stats(request):
     
 
 def latest(request):
-    websites = Website.objects.filter(verified=True).order_by('-created',).select_related()
+    websites = Website.objects.select_related().filter(verified=True).order_by('-created',).select_related()
 
     return render_to_response('websites/website_list.html', RequestContext(request, {
         'website_list': websites,
